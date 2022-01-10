@@ -47,15 +47,45 @@ for (let i = 0; i < team.length; i++) {
   const teamMember = team[i];
   // stampo in pagina
   hookHtml.innerHTML += `<div class="team-card">
+    <div class="card-image">
+      <img
+        src="img/${teamMember.image}"
+        alt="Wayne Barnett"
+      />
+    </div>
+    <div class="card-text">
+      <h3> ${teamMember.name} </h3>
+      <p> ${teamMember.role} </p>
+    </div>
+  </div>`;
+}
+
+/* BONUS:
+Utilizziamo gli input presenti nella pagina per permettere all’utente 
+di aggiungere nuovi membri del team:
+cliccando sul pulsante “add” viene creato un nuovo oggetto, il quale viene
+ inserito nell’array iniziale, e viene stampata una nuova card con tutte
+  le informazioni inserite dall’utente. */
+buttonNewMember = document.getElementById("addMemberButton");
+buttonNewMember.addEventListener("click", function () {
+  const newUsername = document.getElementById("name").value;
+  const newUserRole = document.getElementById("role").value;
+  const newUserImage = document.getElementById("image").value;
+  team.push({
+    name: newUsername,
+    role: newUserRole,
+    image: newUserImage,
+  });
+  hookHtml.innerHTML += `<div class="team-card">
   <div class="card-image">
     <img
-      src="img/${teamMember.image}"
+      src="img/${newUserImage}"
       alt="Wayne Barnett"
     />
   </div>
   <div class="card-text">
-    <h3> ${teamMember.name} </h3>
-    <p> ${teamMember.role} </p>
+    <h3> ${newUsername} </h3>
+    <p> ${newUserRole} </p>
   </div>
 </div>`;
-}
+});
