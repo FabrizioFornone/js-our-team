@@ -42,23 +42,29 @@ const team = [
   },
 ];
 
-for (let i = 0; i < team.length; i++) {
-  // assegnazione di una costante al valore team[i]
-  const teamMember = team[i];
-  // stampo in pagina
-  hookHtml.innerHTML += `<div class="team-card">
-    <div class="card-image">
-      <img
-        src="img/${teamMember.image}"
-        alt="Wayne Barnett"
-      />
-    </div>
-    <div class="card-text">
-      <h3> ${teamMember.name} </h3>
-      <p> ${teamMember.role} </p>
-    </div>
-  </div>`;
+//funzione per la stampa delle card del team
+
+function TeamCards(list) {
+  for (let i = 0; i < team.length; i++) {
+    // assegnazione di una costante al valore team[i]
+    const teamMember = list[i];
+    // stampo in pagina
+    hookHtml.innerHTML += `<div class="team-card">
+      <div class="card-image">
+        <img
+          src="img/${teamMember.image}"
+          alt="Wayne Barnett"
+        />
+      </div>
+      <div class="card-text">
+        <h3> ${teamMember.name} </h3>
+        <p> ${teamMember.role} </p>
+      </div>
+    </div>`;
+  }
 }
+
+TeamCards(team);
 
 /* BONUS:
 Utilizziamo gli input presenti nella pagina per permettere all’utente 
@@ -67,35 +73,42 @@ cliccando sul pulsante “add” viene creato un nuovo oggetto, il quale viene
  inserito nell’array iniziale, e viene stampata una nuova card con tutte
   le informazioni inserite dall’utente. */
 
-// Collego il bottone
+//funzione per la creazione di un nuova Member Card
+
+function newMemberCreator(listener) {
+  // Assegno addEventListener al bottone
+  listener.addEventListener("click", function () {
+    //raccoglie il valore dell'input "name"
+    const newUsername = document.getElementById("name").value;
+    //raccoglie il valore dell'input "role"
+    const newUserRole = document.getElementById("role").value;
+    //raccoglie il valore dell'input "image"
+    const newUserImage = document.getElementById("image").value;
+    //creazione di un nuovo oggetto tramite il push nell'array "team"
+    team.push({
+      name: newUsername,
+      role: newUserRole,
+      image: newUserImage,
+    });
+    console.log(team);
+    //stampo in HTML il nuovo user
+    hookHtml.innerHTML += `<div class="team-card">
+    <div class="card-image">
+      <img
+        src="img/${newUserImage}"
+        alt="Wayne Barnett"
+      />
+    </div>
+    <div class="card-text">
+      <h3> ${newUsername} </h3>
+      <p> ${newUserRole} </p>
+    </div>
+  </div>`;
+  });
+}
+
+// Collego buttonNewMember con il button i  HTMLs
 buttonNewMember = document.getElementById("addMemberButton");
 
-// Assegno addEventListener al bottone
-buttonNewMember.addEventListener("click", function () {
-  //raccoglie il valore dell'input "name"
-  const newUsername = document.getElementById("name").value;
-  //raccoglie il valore dell'input "role"
-  const newUserRole = document.getElementById("role").value;
-  //raccoglie il valore dell'input "image"
-  const newUserImage = document.getElementById("image").value;
-  //creazione di un nuovo oggetto tramite il push nell'array "team"
-  team.push({
-    name: newUsername,
-    role: newUserRole,
-    image: newUserImage,
-  });
-  console.log(team);
-  //stampo in HTML il nuovo user
-  hookHtml.innerHTML += `<div class="team-card">
-  <div class="card-image">
-    <img
-      src="img/${newUserImage}"
-      alt="Wayne Barnett"
-    />
-  </div>
-  <div class="card-text">
-    <h3> ${newUsername} </h3>
-    <p> ${newUserRole} </p>
-  </div>
-</div>`;
-});
+//Eseguo la funzione newMemberCreator
+newMemberCreator(buttonNewMember);
