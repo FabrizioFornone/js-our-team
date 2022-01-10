@@ -66,16 +66,26 @@ di aggiungere nuovi membri del team:
 cliccando sul pulsante “add” viene creato un nuovo oggetto, il quale viene
  inserito nell’array iniziale, e viene stampata una nuova card con tutte
   le informazioni inserite dall’utente. */
+
+// Collego il bottone
 buttonNewMember = document.getElementById("addMemberButton");
+
+// Assegno addEventListener al bottone
 buttonNewMember.addEventListener("click", function () {
+  //raccoglie il valore dell'input "name"
   const newUsername = document.getElementById("name").value;
+  //raccoglie il valore dell'input "role"
   const newUserRole = document.getElementById("role").value;
+  //raccoglie il valore dell'input "image"
   const newUserImage = document.getElementById("image").value;
+  //creazione di un nuovo oggetto tramite il push nell'array "team"
   team.push({
     name: newUsername,
     role: newUserRole,
     image: newUserImage,
   });
+  console.log(team);
+  //stampo in HTML il nuovo user
   hookHtml.innerHTML += `<div class="team-card">
   <div class="card-image">
     <img
