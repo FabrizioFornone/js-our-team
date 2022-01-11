@@ -74,7 +74,7 @@ printTeamMembers(hookHtml, team);
     le informazioni inserite dall’utente. */
 
 // Collego buttonNewMember con il button i  HTMLs
-buttonNewMember = document.getElementById("addMemberButton");
+const buttonNewMember = document.getElementById("addMemberButton");
 
 // Assegno addEventListener al bottone
 buttonNewMember.addEventListener("click", function () {
